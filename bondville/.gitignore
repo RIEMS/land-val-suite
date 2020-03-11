@@ -1,8 +1,9 @@
 *.exe
 *.TBL
 init.nc
+input/*.nc
 !input/.gitkeep
-output/*
+output/*.nc
 !output/.gitkeep
-state/*
+state/*.nc
 !state/.gitkeep
