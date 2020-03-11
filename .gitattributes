@@ -1,0 +1,8 @@
+# Source files
+*.py text
+*.namelist text
+*.nml text
+*.cdl text
+
+# Binary files
+*.nc binary
