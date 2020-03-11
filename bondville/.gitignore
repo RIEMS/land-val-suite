@@ -1,0 +1,8 @@
+*.exe
+*.TBL
+init.nc
+!input/.gitkeep
+output/*
+!output/.gitkeep
+state/*
+!state/.gitkeep
