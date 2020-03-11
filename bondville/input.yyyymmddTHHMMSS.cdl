@@ -1,0 +1,48 @@
+netcdf LDASIN.19980101T000000 {
+dimensions:
+	south_north = 1 ;
+	west_east = 1 ;
+	time = UNLIMITED ;
+variables:
+	float U2D(time, south_north, west_east) ;
+		U2D:long_name = "eastward wind speed at the surface" ;
+		U2D:units = "m s-1" ;
+		U2D:standard_name = "eastward_wind_speed" ;
+		U2D:_FillValue = NaN ;
+	float V2D(time, south_north, west_east) ;
+		V2D:long_name = "northward wind speed at the surface" ;
+		V2D:units = "m s-1" ;
+		V2D:standard_name = "northward_wind_speed" ;
+		V2D:_FillValue = NaN ;
+	float T2D(time, south_north, west_east) ;
+		T2D:long_name = "air temperature at the surface" ;
+		T2D:units = "K" ;
+		T2D:standard_name = "air_temperature" ;
+		T2D:_FillValue = NaN ;
+	float Q2D(time, south_north, west_east) ;
+		Q2D:long_name = "water vapor mixing ratio" ;
+		Q2D:units = "kg kg-1" ;
+		Q2D:standard_name = "humidity_mixing_ratio" ;
+		Q2D:_FillValue = NaN ;
+	float PSFC(time, south_north, west_east) ;
+		PSFC:long_name = "surface air pressure" ;
+		PSFC:units = "Pa" ;
+		PSFC:standard_name = "surface_air_pressure" ;
+		PSFC:_FillValue = NaN ;
+	float SWDOWN(time, south_north, west_east) ;
+		SWDOWN:long_name = "downwelling shortwave flux at the surface" ;
+		SWDOWN:units = "W m-2" ;
+		SWDOWN:standard_name = "surface_downwelling_shortwave_flux_in_air" ;
+		SWDOWN:_FillValue = NaN ;
+	float LWDOWN(time, south_north, west_east) ;
+		LWDOWN:long_name = "downwelling longwave flux at the surface" ;
+		LWDOWN:units = "W m-2" ;
+		LWDOWN:standard_name = "surface_downwelling_longwave_flux_in_air" ;
+		LWDOWN:_FillValue = NaN ;
+	float RAINRATE(time, south_north, west_east) ;
+		RAINRATE:long_name = "precipitation rate at the surface" ;
+		RAINRATE:units = "kg m-2 s-1" ;
+		RAINRATE:standard_name = "precipitation_flux" ;
+		RAINRATE:_FillValue = NaN ;
+data:
+}
