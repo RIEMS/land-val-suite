@@ -1,0 +1,178 @@
+netcdf init {
+dimensions:
+	west_east = 1 ;
+	south_north = 1 ;
+	soil_layers = 4 ;
+variables:
+	double XLAT(south_north, west_east) ;
+		XLAT:long_name = "latitude" ;
+		XLAT:units = "degree_north" ;
+		XLAT:standard_name = "latitude" ;
+	double XLONG(south_north, west_east) ;
+		XLONG:long_name = "longitude" ;
+		XLONG:units = "degree_east" ;
+		XLONG:standard_name = "longitude" ;
+	byte XLAND(south_north, west_east) ;
+		XLAND:long_name = "land sea mask" ;
+		XLAND:units = "-" ;
+		XLAND:standard_name = "land_binary_mask" ;
+		XLAND:_FillValue = 0b ;
+		XLAND:valid_range = 1b, 2b ;
+		XLAND:flag_value = 1b, 2b ;
+		XLAND:flag_meanings = "land sea" ;
+	float SEAICE(south_north, west_east) ;
+		SEAICE:long_name = "sea ice fraction" ;
+		SEAICE:units = "1" ;
+		SEAICE:valid_range = 0., 1. ;
+	float HGT(south_north, west_east) ;
+		HGT:long_name = "elevation" ;
+		HGT:units = "m" ;
+		HGT:standard_name = "surface_altitude" ;
+		HGT:_FillValue = NaN ;
+	float TMN(south_north, west_east) ;
+		TMN:long_name = "deep soil temperature" ;
+		TMN:units = "K" ;
+		TMN:_FillValue = NaN ;
+	byte IVGTYP(south_north, west_east) ;
+		IVGTYP:long_name = "land cover type" ;
+		IVGTYP:units = "-" ;
+		IVGTYP:_FillValue = 0 ;
+	byte ISLTYP(south_north, west_east) ;
+		ISLTYP:long_name = "soil type" ;
+		ISLTYP:units = "-" ;
+		ISLTYP:standard_name = "soil_type" ;
+		ISLTYP:_FillValue = 0 ;
+	float CANWAT(south_north, west_east) ;
+		CANWAT:long_name = "canopy water amount" ;
+		CANWAT:units = "kg m-2" ;
+		CANWAT:standard_name = "canopy_water_amount" ;
+		CANWAT:_FillValue = NaN ;
+	float TSK(south_north, west_east) ;
+		TSK:long_name = "surface temperature" ;
+		TSK:units = "K" ;
+		TSK:standard_name = "surface_temperature" ;
+		TSK:_FillValue = NaN ;
+	float SNOW(south_north, west_east) ;
+		SNOW:long_name = "surface snow amount" ;
+		SNOW:units = "kg m-2" ;
+		SNOW:standard_name = "surface_snow_amount" ;
+		SNOW:_FillValue = NaN ;
+	float SNODEP(south_north, west_east) ;
+		SNODEP:long_name = "surface snow thickness" ;
+		SNODEP:units = "m" ;
+		SNODEP:standard_name = "surface_snow_thickness" ;
+		SNODEP:_FillValue = NaN ;
+	float DZS(soil_layers) ;
+		DZS:long_name = "soil layer thickness" ;
+		DZS:units = "m" ;
+		DZS:_FillValue = NaN ;
+	float TSLB(soil_layers, south_north, west_east) ;
+		TSLB:long_name = "soil layer temperature" ;
+		TSLB:units = "K" ;
+		TSLB:_FillValue = NaN ;
+	float SMOIS(soil_layers, south_north, west_east) ;
+		SMOIS:long_name = "soil layer moisture content" ;
+		SMOIS:units = "m3 m-3" ;
+		SMOIS:_FillValue = NaN ;
+		SMOIS:valid_range = 0., 1. ;
+	float VEGFRA(south_north, west_east) ;
+		VEGFRA:long_name = "vegetation area fraction" ;
+		VEGFRA:units = "1" ;
+		VEGFRA:standard_name = "vegetation_area_fraction" ;
+		VEGFRA:_FillValue = NaN ;
+		VEGFRA:valid_range = 0., 1. ;
+		VEGFRA:ancillary_variables = "SHDMIN SHDMAX" ;
+	float SHDMIN(south_north, west_east) ;
+		SHDMIN:long_name = "minimum vegetation area fraction" ;
+		SHDMIN:units = "1" ;
+		SHDMIN:_FillValue = NaN ;
+		SHDMIN:valid_range = 0., 1. ;
+	float SHDMAX(south_north, west_east) ;
+		SHDMAX:long_name = "maximum vegetation area fraction" ;
+		SHDMAX:units = "1" ;
+		SHDMAX:_FillValue = NaN ;
+		SHDMAX:valid_range = 0., 1. ;
+	float LAI(south_north, west_east) ;
+		LAI:long_name = "leaf area index" ;
+		LAI:units = "m2 m-2" ;
+		LAI:standard_name = "leaf_area_index" ;
+		LAI:_FillValue = NaN ;
+
+// global attributes:
+		:title = "Bondville surface meteorological data" ;
+		:DX = 100. ;
+		:DY = 100. ;
+		:TRUELAT1 = 30. ;
+		:TRUELAT2 = 60. ;
+		:STAND_LON = -88.37 ;
+		:MAP_PROJ = 6 ;
+		:GRID_ID = 1 ;
+		:ISWATER = 16 ;
+		:ISLAKE = 16 ;
+		:ISURBAN = 1 ;
+		:ISICE = 24 ;
+		:MMINLU = "USGS" ;
+data:
+
+ XLAT =
+  40.01 ;
+
+ XLONG =
+  -88.37 ;
+
+ XLAND =
+  1 ;
+
+ SEAICE =
+  0 ;
+
+ HGT =
+  218 ;
+
+ TMN =
+  285 ;
+
+ IVGTYP =
+  2 ;
+
+ ISLTYP =
+  8 ;
+
+ CANWAT =
+  0.01 ;
+
+ TSK =
+  263.7 ;
+
+ SNOW =
+  1 ;
+
+ SNODEP =
+  0.01 ;
+
+ DZS = 0.1, 0.3, 0.6, 1 ;
+
+ TSLB =
+  266.1,
+  274,
+  276.9,
+  279.9 ;
+
+ SMOIS =
+  0.298,
+  0.294,
+  0.271,
+  0.307 ;
+
+ VEGFRA =
+  1 ;
+
+ LAI =
+  2 ;
+
+ SHDMIN =
+  0.96 ;
+
+ SHDMAX =
+  0.01 ;
+}
