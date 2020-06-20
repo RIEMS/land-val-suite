@@ -10,7 +10,8 @@ import numpy as np
 import netCDF4 as nc
 
 INFILE = 'bondville.dat'
-ATMROOT = 'input'
+ATMROOT = '.'
+TEMPLATE = '../input.yyyymmddTHHMMSS.cdl'
 
 TNAME = 'T2D'
 QNAME = 'Q2D'
@@ -37,8 +38,8 @@ with open(INFILE, 'rt') as f:
         es = 610.78 * math.exp(17.2693882 * (t - 273.16) / (t - 35.86)) # saturation mixing ratio in Pa
         e = es * rh # water vapor pressure
         r = 0.622 * e / (p - e) # water vapor mixing ratio
-        ncfname = os.path.join('input',dt.strftime('LDASIN.%Y%m%dT%H%M%S.nc'))
-        subprocess.run(['ncgen', '-3', '-o', ncfname, 'input.yyyymmddTHHMMSS.cdl'])
+        ncfname = os.path.join(ATMROOT, dt.strftime('LDASIN.%Y%m%dT%H%M%S.nc'))
+        subprocess.run(['ncgen', '-3', '-o', ncfname, TEMPLATE])
         with nc.Dataset(ncfname, 'a') as ncf:
             ncf.variables[UNAME][0,:] = u
             ncf.variables[VNAME][0,:] = 0
