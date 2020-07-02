@@ -47,5 +47,5 @@ with open(INFILE, 'rt') as f:
             ncf.variables[QNAME][0,:] = r
             ncf.variables[PNAME][0,:] = p
             ncf.variables[SWNAME][0,:] = sw
-            ncf.variables[LWNAME][0,:] = sw
+            ncf.variables[LWNAME][0,:] = lw
             ncf.variables[PRNAME][0,:] = pr
