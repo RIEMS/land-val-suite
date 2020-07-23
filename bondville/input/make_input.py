@@ -38,13 +38,14 @@ with open(INFILE, 'rt') as f:
         es = 610.78 * math.exp(17.2693882 * (t - 273.16) / (t - 35.86)) # saturation mixing ratio in Pa
         e = es * rh # water vapor pressure
         r = 0.622 * e / (p - e) # water vapor mixing ratio
+        h = r / (1.0 + r) # specific humidity
         ncfname = os.path.join(ATMROOT, dt.strftime('LDASIN.%Y%m%dT%H%M%S.nc'))
         subprocess.run(['ncgen', '-3', '-o', ncfname, TEMPLATE])
         with nc.Dataset(ncfname, 'a') as ncf:
             ncf.variables[UNAME][0,:] = u
             ncf.variables[VNAME][0,:] = 0
             ncf.variables[TNAME][0,:] = t
-            ncf.variables[QNAME][0,:] = r
+            ncf.variables[QNAME][0,:] = h
             ncf.variables[PNAME][0,:] = p
             ncf.variables[SWNAME][0,:] = sw
             ncf.variables[LWNAME][0,:] = lw

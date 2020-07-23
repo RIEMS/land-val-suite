@@ -20,9 +20,9 @@ variables:
 		T2D:standard_name = "air_temperature" ;
 		T2D:_FillValue = NaN ;
 	float Q2D(time, south_north, west_east) ;
-		Q2D:long_name = "water vapor mixing ratio" ;
+		Q2D:long_name = "specific humidity" ;
 		Q2D:units = "kg kg-1" ;
-		Q2D:standard_name = "humidity_mixing_ratio" ;
+		Q2D:standard_name = "specific_humidity" ;
 		Q2D:_FillValue = NaN ;
 	float PSFC(time, south_north, west_east) ;
 		PSFC:long_name = "surface air pressure" ;
