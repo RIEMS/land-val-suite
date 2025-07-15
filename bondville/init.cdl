@@ -3,6 +3,7 @@ dimensions:
 	west_east = 1 ;
 	south_north = 1 ;
 	soil_layers = 4 ;
+	snow_layers = 3 ;
 variables:
 	double XLAT(south_north, west_east) ;
 		XLAT:long_name = "latitude" ;
@@ -20,98 +21,113 @@ variables:
 		XLAND:valid_range = 1b, 2b ;
 		XLAND:flag_value = 1b, 2b ;
 		XLAND:flag_meanings = "land sea" ;
-	float SEAICE(south_north, west_east) ;
-		SEAICE:long_name = "sea ice fraction" ;
-		SEAICE:units = "1" ;
-		SEAICE:valid_range = 0., 1. ;
-	float HGT(south_north, west_east) ;
-		HGT:long_name = "elevation" ;
-		HGT:units = "m" ;
-		HGT:standard_name = "surface_altitude" ;
-		HGT:_FillValue = NaN ;
-	float TMN(south_north, west_east) ;
-		TMN:long_name = "deep soil temperature" ;
-		TMN:units = "K" ;
-		TMN:_FillValue = NaN ;
-	byte IVGTYP(south_north, west_east) ;
-		IVGTYP:long_name = "land cover type" ;
-		IVGTYP:units = "-" ;
-		IVGTYP:_FillValue = 0 ;
-	byte ISLTYP(south_north, west_east) ;
-		ISLTYP:long_name = "soil type" ;
-		ISLTYP:units = "-" ;
-		ISLTYP:standard_name = "soil_type" ;
-		ISLTYP:_FillValue = 0 ;
-	float CANWAT(south_north, west_east) ;
-		CANWAT:long_name = "canopy water amount" ;
-		CANWAT:units = "kg m-2" ;
-		CANWAT:standard_name = "canopy_water_amount" ;
-		CANWAT:_FillValue = NaN ;
-	float TSK(south_north, west_east) ;
-		TSK:long_name = "surface temperature" ;
-		TSK:units = "K" ;
-		TSK:standard_name = "surface_temperature" ;
-		TSK:_FillValue = NaN ;
+	float CANLIQ(south_north, west_east) ;
+		CANLIQ:long_name = "canopy_liquid_water_amount" ;
+		CANLIQ:units = "kg m-2" ;
+		CANLIQ:_FillValue = NaN ;
+	float CANICE(south_north, west_east) ;
+		CANICE:standard_name = "canopy_snow_amount" ;
+		CANICE:units = "kg m-2" ;
+		CANICE:_FillValue = NaN ;
+	float TV(south_north, west_east) ;
+		TV:standard_name = "canopy_temperature" ;
+		TV:units = "K" ;
+		TV:_FillValue = NaN ;
+	float TG(south_north, west_east) ;
+		TG:standard_name = "surface_temperature" ;
+		TG:units = "K" ;
+		TG:_FillValue = NaN ;
+	int NSNOW(south_north, west_east) ;
+		NSNOW:long_name = "snow_layer_count" ;
+		NSNOW:units = "1" ;
+		NSNOW:_FillValue = -1 ;
 	float SNOW(south_north, west_east) ;
-		SNOW:long_name = "surface snow amount" ;
-		SNOW:units = "kg m-2" ;
 		SNOW:standard_name = "surface_snow_amount" ;
+		SNOW:units = "kg m-2" ;
 		SNOW:_FillValue = NaN ;
-	float SNODEP(south_north, west_east) ;
-		SNODEP:long_name = "surface snow thickness" ;
-		SNODEP:units = "m" ;
-		SNODEP:standard_name = "surface_snow_thickness" ;
-		SNODEP:_FillValue = NaN ;
-	float DZS(soil_layers) ;
-		DZS:long_name = "soil layer thickness" ;
-		DZS:units = "m" ;
-		DZS:_FillValue = NaN ;
-	float TSLB(soil_layers, south_north, west_east) ;
-		TSLB:long_name = "soil layer temperature" ;
-		TSLB:units = "K" ;
-		TSLB:_FillValue = NaN ;
-	float SMOIS(soil_layers, south_north, west_east) ;
-		SMOIS:long_name = "soil layer moisture content" ;
-		SMOIS:units = "m3 m-3" ;
-		SMOIS:_FillValue = NaN ;
-		SMOIS:valid_range = 0., 1. ;
-	float VEGFRA(south_north, west_east) ;
-		VEGFRA:long_name = "vegetation area fraction" ;
-		VEGFRA:units = "1" ;
-		VEGFRA:standard_name = "vegetation_area_fraction" ;
-		VEGFRA:_FillValue = NaN ;
-		VEGFRA:valid_range = 0., 1. ;
-		VEGFRA:ancillary_variables = "SHDMIN SHDMAX" ;
-	float SHDMIN(south_north, west_east) ;
-		SHDMIN:long_name = "minimum vegetation area fraction" ;
-		SHDMIN:units = "1" ;
-		SHDMIN:_FillValue = NaN ;
-		SHDMIN:valid_range = 0., 1. ;
-	float SHDMAX(south_north, west_east) ;
-		SHDMAX:long_name = "maximum vegetation area fraction" ;
-		SHDMAX:units = "1" ;
-		SHDMAX:_FillValue = NaN ;
-		SHDMAX:valid_range = 0., 1. ;
+	float SNOWH(south_north, west_east) ;
+		SNOWH:standard_name = "surface_snow_thickness" ;
+		SNOWH:units = "m" ;
+		SNOWH:_FillValue = NaN ;
+	float DZSNOW(snow_layers, south_north, west_east) ;
+		DZSNOW:standard_name = "surface_snow_thickness" ;
+		DZSNOW:units = "m" ;
+		DZSNOW:_FillValue = NaN ;
+	float SNOWT(snow_layers, south_north, west_east) ;
+		SNOWT:standard_name = "snow_temperature" ;
+		SNOWT:units = "K" ;
+		SNOWT:_FillValue = NaN ;
+	float SNOWLIQ(snow_layers, south_north, west_east) ;
+		SNOWLIQ:standard_name = "liquid_water_content_of_surface_snow" ;
+		SNOWLIQ:units = "kg m-2" ;
+		SNOWLIQ:_FillValue = NaN ;
+	float SNOWICE(snow_layers, south_north, west_east) ;
+		SNOWICE:standard_name = "solid_water_content_of_surface_snow" ;
+		SNOWICE:units = "kg m-2" ;
+		SNOWICE:_FillValue = NaN ;
+	float SOILT(soil_layers, south_north, west_east) ;
+		SOILT:long_name = "soil layer temperature" ;
+		SOILT:units = "K" ;
+		SOILT:_FillValue = NaN ;
+	float SOILM(soil_layers, south_north, west_east) ;
+		SOILM:long_name = "soil layer moisture content" ;
+		SOILM:units = "m3 m-3" ;
+		SOILM:_FillValue = NaN ;
+		SOILM:valid_range = 0., 1. ;
+	float SOILMLIQ(soil_layers, south_north, west_east) ;
+		SOILMLIQ:long_name = "soil layer moisture liquid content" ;
+		SOILMLIQ:units = "m3 m-3" ;
+		SOILMLIQ:_FillValue = NaN ;
+		SOILMLIQ:valid_range = 0., 1. ;
+	float WA(south_north, west_east) ;
+		WA:long_name = "groundwater_amount" ;
+		WA:units = "kg m-2" ;
+		WA:_FillValue = NaN ;
+	float WT(south_north, west_east) ;
+		WT:long_name = "water_storage_in_saturated_soil_and_groundwater" ;
+		WT:units = "kg m-2" ;
+		WT:_FillValue = NaN ;
+	float ZWT(south_north, west_east) ;
+		ZWT:long_name = "water_table_depth" ;
+		ZWT:units = "m" ;
+		ZWT:_FillValue = NaN ;
 	float LAI(south_north, west_east) ;
 		LAI:long_name = "leaf area index" ;
 		LAI:units = "m2 m-2" ;
 		LAI:standard_name = "leaf_area_index" ;
 		LAI:_FillValue = NaN ;
+	float SAI(south_north, west_east) ;
+		SAI:long_name = "stem area index" ;
+		SAI:units = "m2 m-2" ;
+		SAI:standard_name = "stem_area_index" ;
+		SAI:_FillValue = NaN ;
+	float LFMASS(south_north, west_east) ;
+		LFMASS:long_name = "leaf_mass" ;
+		LFMASS:units = "g m-2" ;
+		LFMASS:_FillValue = NaN ;
+	float RTMASS(south_north, west_east) ;
+		RTMASS:long_name = "root_mass" ;
+		RTMASS:units = "g m-2" ;
+		RTMASS:_FillValue = NaN ;
+	float STMASS(south_north, west_east) ;
+		STMASS:long_name = "stem_mass" ;
+		STMASS:units = "g m-2" ;
+		STMASS:_FillValue = NaN ;
+	float WDMASS(south_north, west_east) ;
+		WDMASS:long_name = "wood_mass" ;
+		WDMASS:units = "g m-2" ;
+		WDMASS:_FillValue = NaN ;
+	float STBLCP(south_north, west_east) ;
+		STBLCP:long_name = "stable_carbon_pool" ;
+		STBLCP:units = "g m-2" ;
+		STBLCP:_FillValue = NaN ;
+	float FASTCP(south_north, west_east) ;
+		FASTCP:long_name = "fast_carbon_pool" ;
+		FASTCP:units = "g m-2" ;
+		FASTCP:_FillValue = NaN ;
 
 // global attributes:
 		:title = "Bondville surface meteorological data" ;
-		:DX = 100. ;
-		:DY = 100. ;
-		:TRUELAT1 = 30. ;
-		:TRUELAT2 = 60. ;
-		:STAND_LON = -88.37 ;
-		:MAP_PROJ = 6 ;
-		:GRID_ID = 1 ;
-		:ISWATER = 16 ;
-		:ISLAKE = 16 ;
-		:ISURBAN = 1 ;
-		:ISICE = 24 ;
-		:MMINLU = "USGS" ;
 data:
 
  XLAT =
@@ -120,59 +136,95 @@ data:
  XLONG =
   -88.37 ;
 
- XLAND =
-  1 ;
-
- SEAICE =
-  0 ;
-
- HGT =
-  218 ;
-
- TMN =
-  285 ;
-
- IVGTYP =
-  2 ;
-
- ISLTYP =
-  8 ;
-
- CANWAT =
+ CANLIQ =
   0.01 ;
 
- TSK =
+ CANICE =
+  0.00 ;
+
+ TV =
   263.7 ;
+
+ TG =
+  263.7 ;
+
+ NSNOW =
+  0 ;
 
  SNOW =
   1 ;
 
- SNODEP =
+ SNOWH =
   0.01 ;
 
- DZS = 0.1, 0.3, 0.6, 1 ;
+ DZSNOW =
+  0.01,
+  0.00,
+  0.00 ;
 
- TSLB =
+ SNOWT =
+  273.15,
+  273.15,
+  273.15 ;
+
+ SNOWLIQ =
+  0.00,
+  0.00,
+  0.00 ;
+
+ SNOWICE =
+  1.0,
+  0.00,
+  0.00 ;
+
+ SOILT =
   266.1,
   274,
   276.9,
   279.9 ;
 
- SMOIS =
+ SOILM =
   0.298,
   0.294,
   0.271,
   0.307 ;
 
- VEGFRA =
-  1 ;
+ SOILMLIQ =
+  0.298,
+  0.294,
+  0.271,
+  0.307 ;
+
+ WA =
+  4900.0 ;
+
+ WT =
+  4900.0 ;
+
+ ZWT =
+  2.5 ;
 
  LAI =
   2 ;
 
- SHDMIN =
-  0.96 ;
+ SAI =
+  0.2 ;
 
- SHDMAX =
-  0.01 ;
+ LFMASS =
+  0.83 ;
+
+ STMASS =
+  16.67 ;
+
+ RTMASS =
+  500.0 ;
+
+ WDMASS =
+  500.0 ;
+
+ STBLCP =
+  1000.0 ;
+
+ FASTCP =
+  1000.0 ;
 }

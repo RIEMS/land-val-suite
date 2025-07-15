@@ -1,0 +1,107 @@
+netcdf init {
+dimensions:
+	west_east = 1 ;
+	south_north = 1 ;
+	soil_layers = 4 ;
+variables:
+	double XLAT(south_north, west_east) ;
+		XLAT:long_name = "latitude" ;
+		XLAT:units = "degree_north" ;
+		XLAT:standard_name = "latitude" ;
+	double XLONG(south_north, west_east) ;
+		XLONG:long_name = "longitude" ;
+		XLONG:units = "degree_east" ;
+		XLONG:standard_name = "longitude" ;
+	byte XLAND(south_north, west_east) ;
+		XLAND:long_name = "land sea mask" ;
+		XLAND:units = "-" ;
+		XLAND:standard_name = "land_binary_mask" ;
+		XLAND:_FillValue = 0b ;
+		XLAND:valid_range = 1b, 2b ;
+		XLAND:flag_value = 1b, 2b ;
+		XLAND:flag_meanings = "land sea" ;
+	float HGT(south_north, west_east) ;
+		HGT:long_name = "elevation" ;
+		HGT:units = "m" ;
+		HGT:standard_name = "surface_altitude" ;
+		HGT:_FillValue = NaN ;
+	float TBOT(south_north, west_east) ;
+		TBOT:long_name = "deep soil temperature" ;
+		TBOT:units = "K" ;
+		TBOT:_FillValue = NaN ;
+	byte IVGTYP(south_north, west_east) ;
+		IVGTYP:long_name = "land cover type" ;
+		IVGTYP:units = "-" ;
+		IVGTYP:_FillValue = 0 ;
+	byte ISLTYP(south_north, west_east) ;
+		ISLTYP:long_name = "soil type" ;
+		ISLTYP:units = "-" ;
+		ISLTYP:standard_name = "soil_type" ;
+		ISLTYP:_FillValue = 0 ;
+	float DZSOIL(soil_layers) ;
+		DZSOIL:long_name = "soil layer thickness" ;
+		DZSOIL:units = "m" ;
+		DZSOIL:_FillValue = NaN ;
+	float FVEG(south_north, west_east) ;
+		FVEG:long_name = "vegetation area fraction" ;
+		FVEG:units = "1" ;
+		FVEG:standard_name = "vegetation_area_fraction" ;
+		FVEG:_FillValue = NaN ;
+		FVEG:valid_range = 0., 1. ;
+		FVEG:ancillary_variables = "FVEGMIN FVEGMAX" ;
+	float FVEGMIN(south_north, west_east) ;
+		FVEGMIN:long_name = "minimum vegetation area fraction" ;
+		FVEGMIN:units = "1" ;
+		FVEGMIN:_FillValue = NaN ;
+		FVEGMIN:valid_range = 0., 1. ;
+	float FVEGMAX(south_north, west_east) ;
+		FVEGMAX:long_name = "maximum vegetation area fraction" ;
+		FVEGMAX:units = "1" ;
+		FVEGMAX:_FillValue = NaN ;
+		FVEGMAX:valid_range = 0., 1. ;
+	float LAI(south_north, west_east) ;
+		LAI:long_name = "leaf area index" ;
+		LAI:units = "m2 m-2" ;
+		LAI:standard_name = "leaf_area_index" ;
+		LAI:_FillValue = NaN ;
+
+// global attributes:
+		:title = "Bondville surface meteorological data" ;
+		:MMINLU = "MODIFIED_IGBP_MODIS_NOAH" ;
+data:
+
+ XLAT =
+  40.01 ;
+
+ XLONG =
+  -88.37 ;
+
+ XLAND =
+  1 ;
+
+ HGT =
+  218 ;
+
+ TBOT =
+  285 ;
+
+ IVGTYP =
+  12 ;
+
+ ISLTYP =
+  8 ;
+
+ DZSOIL = 0.1, 0.3, 0.6, 1 ;
+
+ FVEG =
+  1 ;
+
+ LAI =
+  2 ;
+
+ FVEGMIN =
+  0.01 ;
+
+ FVEGMAX =
+  0.96 ;
+}

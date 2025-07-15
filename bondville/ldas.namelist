@@ -1,40 +1,29 @@
-! This file give a brief description of all namelist.hrldas variables and their defaults
-! *** indicates required
+&LSM_OFFLINE
+ SETUP_FILE = "setup.nc"      !*** Path to wrfinput or HRLDAS setup file   [default = none]
+ INDIR      = "input"        !*** Path to IN files                    [default = none]
+ OUTDIR     = "output"       !    Path to OUT files                [default = "." ]
+ RESDIR     = "state"        !    Path to RES files                [default = "." ]
 
+ LOOKUP_TABLE_FILE = "MPTABLE.TBL"
 
-&NOAHLSM_OFFLINE
+ START_YEAR   = 1998        !*** Year to start simulation                [default = none]
+ START_MONTH  = 01          !*** Month to start simulation               [default = none]
+ START_DAY    = 01          !*** Day to start simulation                 [default = none]
+ START_HOUR   = 00          !*** Hour to start simulation                [default = none]
+ START_MINUTE = 00          !*** Minute to start simulation              [default = none]
 
- HRLDAS_SETUP_FILE = "init.nc"      !*** Path to wrfinput or HRLDAS setup file   [default = none]
- INDIR             = "input"        !*** Path to LDASIN files                    [default = none]
- OUTDIR            = "output"       !    Path to output directory                [default = "." ]
- RESDIR            = "state"        !    Path to start directory                [default = "." ]
-
- START_YEAR  = 1998                 !*** Year to start simulation                [default = none]
- START_MONTH = 01                   !*** Month to start simulation               [default = none]
- START_DAY   = 01                   !*** Day to start simulation                 [default = none]
- START_HOUR  = 00                   !*** Hour to start simulation                [default = none]
- START_MIN   = 00                                    !*** Minute to start simulation              [default = none]
-
- !RESTART_FILENAME_REQUESTED = "state/RESTART.19980101T000000.nc"   ! Path to restart file; required for restart [default = " " ]
-
-                                    !*** Note: exactly one of the following are required
- !KDAY  = 1                         !    Number of days to run                   [default = none]
- KHOUR = 8760                       !    Number of hours to run                  [default = none]
-
- SPINUP_LOOPS = 0                   !    Number of spinup loops of khour/kday
-                                    !     before simulation starts               [default = 0   ]
+ STOP_YEAR   = 1999        !*** Year to stop simulation                [default = none]
+ STOP_MONTH  = 01          !*** Month to stop simulation               [default = none]
+ STOP_DAY    = 01          !*** Day to stop simulation                 [default = none]
+ STOP_HOUR   = 00          !*** Hour to stop simulation                [default = none]
+ STOP_MINUTE = 00          !*** Minute to stop simulation              [default = none]
 
                                     !*** Note: NOAH_TIMESTEP must evenly divide both
                                     !           FORCING_TIMESTEP and OUTPUT_TIMESTEP
- FORCING_TIMESTEP = 1800            !    Seconds between forcing files           [default = none]
- NOAH_TIMESTEP    = 900             !    Seconds between model timesteps         [default = none]
- OUTPUT_TIMESTEP  = 1800            !    Seconds between output times            [default = none]
-
- SPLIT_OUTPUT_COUNT = 1             !    Number of times per output file         [default = 1   ]
- SKIP_FIRST_OUTPUT = .false.        !    Skips first output file (initial fields)[default = .false.]
- RESTART_FREQUENCY_HOURS = 24       !*** Number of hours between restart files   [default = none]
-                                    !     If  0, do not write restart files
-                                    !     If <0, write at beginning of the month
+ MODEL_TIMESTEP   = 900            !    Seconds between model timesteps         [default = none]
+ INPUT_TIMESTEP   = 1800           !    Seconds between forcing files           [default = none]
+ OUTPUT_TIMESTEP  = 1800           !    Seconds between output times            [default = none]
+ RESTART_TIMESTEP = 1800           !    Seconds between restart files           [default = none]
 
  ! Set these four to perform simulation over a sub-domain
  XSTART = 1   !    Defines start of sub-domain in x        [default = 1   ]
@@ -42,30 +31,7 @@
  YSTART = 1   !    Defines start of sub-domain in y        [default = 1   ]
  YEND   = 0   !    Defines end of sub-domain in y          [default = 0   ]
 
- NSOIL  = 4                         !*** Number of soil layers                   [default = none]
-
- soil_thick_input(1) = 0.10         !*** Vector of soil layer thicknesses
- soil_thick_input(2) = 0.30         !                            [in meters]     [default = none]
- soil_thick_input(3) = 0.60         !     There is a hard-coded maximum of 10
- soil_thick_input(4) = 1.00
-
  ZLVL = 30.0                        !*** Height in meters of forcing level       [default = none]
-
- SF_URBAN_PHYSICS = 0               !    Urban physics option                    [default = 0   ]
-                                    ! **0 -> Bulk urban slab scheme
-                                    !   1 -> Single-layer urban canopy model
-                                    !   2 -> BEP Multi-layer urban canopy model
-                                    !   3 -> BEP + Building Energy Model
-
- URBAN_ATMOSPHERE_THICKNESS = 2.0   !    Thickness of urban atmosphere layers
-                                    !     only needed for urban options 2 and 3  [default = 2.0 ]
-                                    !     must be less than zlvl/3
-
- !NUM_URBAN_LAYERS = 360            !    Number of urban building layers
-                                    !     only needed for urban options 2 and 3  [default = 360 ]
-
- NUM_URBAN_HI     = 15              !    Number of urban atmosphere layers
-                                    !     only needed for urban options 2 and 3  [default = 15  ]
 
  FORCING_NAME_T = "T2D"             !    Forcing variable name for temperature   [default = "T2D"]
  FORCING_NAME_Q = "Q2D"             !    Forcing variable name for spec humidity [default = "Q2D"]
@@ -80,15 +46,11 @@
                                     !       <= total precipitation
                                     !      must set PCP_PARTITION_OPTION = 4
 
- EXTERNAL_VEG_FILENAME_TEMPLATE = " "   ! defunct
- EXTERNAL_LAI_FILENAME_TEMPLATE = " "   ! defunct
-
-
 ! Below is a brief description of all Noah-MP options, there are no defaults
 ! *** all are required
 !  ** indicates default options in WRF
 
- dveg = 1                          ! options for dynamic vegetation:         [default = none]
+ dveg = 4                          ! options for dynamic vegetation:         [default = none]
                                    !   1 -> off (use table LAI; use FVEG = SHDFAC from input)
                                    !   2 -> on  (together with OPT_CRS = 1)
                                    !   3 -> off (use table LAI; calculate FVEG)
@@ -163,12 +125,6 @@
                                    !   2 -> Sellers (1992)
                                    !   3 -> adjusted Sellers to decrease RSURF for wet soil
                                    !   4 -> option 1 for non-snow; rsurf = rsurf_snow for snow (set in MPTABLE); AD v3.8
-
- opt_soil = 1                      ! options for defining soil properties
-                                   ! **1 -> use input dominant soil texture
-                                   !   2 -> use input soil texture that varies with depth
-                                   !   3 -> use soil composition (sand, clay, orgm) and pedotransfer functions (OPT_PEDO)
-                      !            !   4 -> use input soil properties (BEXP_3D, SMCMAX_3D, etc.)
 
  opt_gla = 1                       ! options for glacier treatment           [default = none]
                                    ! **1 -> include phase change of ice

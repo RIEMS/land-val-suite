@@ -1,6 +1,6 @@
 *.exe
 *.TBL
-init.nc
+setup.nc
 input/*.nc
 !input/.gitkeep
 output/*.nc
